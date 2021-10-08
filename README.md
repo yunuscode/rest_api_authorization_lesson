@@ -1,1 +1,1 @@
-# rest_api_authorization_lesson
+# REST API DOCUMENTATION

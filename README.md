@@ -6,4 +6,4 @@
 
 ## 2. Users
 
--   [User Sign Up (Post) || "/users"](/docs/user.md)
+-   [User Sign Up (Post) || "/users/sign_up"](/docs/user.md)

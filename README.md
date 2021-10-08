@@ -2,4 +2,4 @@
 
 ## 1. Home
 
-    - Home (GET) || "/"
+-   [Home (GET) || "/"](/docs/user.md)

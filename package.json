@@ -1,0 +1,21 @@
+{
+	"name": "rest_api_auth",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index",
+		"dev": "nodemon index"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/muhammadyunusuz/rest_api_authorization_lesson.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/muhammadyunusuz/rest_api_authorization_lesson/issues"
+	},
+	"homepage": "https://github.com/muhammadyunusuz/rest_api_authorization_lesson#readme"
+}

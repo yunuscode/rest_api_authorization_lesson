@@ -2,4 +2,8 @@
 
 ## 1. Home
 
--   [Home (GET) || "/"](/docs/user.md)
+-   [Home (GET) || "/"](/docs/home.md)
+
+## 2. Users
+
+-   [User Sign Up (Post) || "/users"](/docs/user.md)

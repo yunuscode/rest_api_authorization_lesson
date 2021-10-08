@@ -12,7 +12,7 @@
 
 ```json
     {
-        "Authorization": {{ TOKEN }}
+        "Authorization": TOKEN
     }
 ```
 

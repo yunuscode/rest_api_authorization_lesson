@@ -1,4 +1,6 @@
-import { sign, verify } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+
+const { verify, sign } = jwt;
 
 export function createToken(data) {
 	return sign(data, process.env.SECRET_KEY);

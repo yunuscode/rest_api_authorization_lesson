@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 import "../models/UserModel.js";
+import "../models/SessionModel.js";
 
 export default async function database() {
 	try {

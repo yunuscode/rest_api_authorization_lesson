@@ -1,6 +1,8 @@
 import User from "../../models/UserModel.js";
 import Validations from "../../modules/validations.js";
 import { genCrypt } from "../../modules/bcrypt.js";
+import { createToken } from "../../modules/jwt.js";
+import Session from "../../models/SessionModel.js";
 
 export default class UserRouteController {
 	static async UserHomeGetController(request, response, next) {
@@ -24,12 +26,26 @@ export default class UserRouteController {
 				password: await genCrypt(password),
 			});
 
-			// console.log(user);
+			const session = await Session.create({
+				user_id: user._id,
+				user_agent: request.headers["user-agent"],
+			});
 
-			// console.log(username, name, password);
+			const token = createToken({
+				session_id: session._id,
+			});
+
+			response.status(200).json({
+				ok: true,
+				message: "User created successfully",
+				data: {
+					token,
+				},
+			});
 		} catch (error) {
 			if (error.name === "MongoServerError" && error.code === 11000) {
 				next(new Error("Username must be unique"));
+				return;
 			}
 			next(error);
 		}

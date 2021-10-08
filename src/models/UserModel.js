@@ -1,4 +1,6 @@
-import { model, Schema } from "mongoose";
+import pkg from "mongoose";
+
+const { model, Schema } = pkg;
 
 const UserSchema = new Schema(
 	{
@@ -30,3 +32,5 @@ const UserSchema = new Schema(
 );
 
 const User = new model("User", UserSchema);
+
+export default User;

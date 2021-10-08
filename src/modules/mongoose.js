@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+import "../models/UserModel.js";
+
 export default async function database() {
 	try {
 		const db = await mongoose.connect(process.env.MONGO_URL);

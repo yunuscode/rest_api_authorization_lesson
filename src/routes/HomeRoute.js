@@ -4,6 +4,6 @@ import AuthMiddleware from "../middlewares/authMiddleware.js";
 
 const HomeRoute = Router();
 
-HomeRoute.get("/", AuthMiddleware, HomeRouteController.HomeRouteGetController);
+HomeRoute.get("/", HomeRouteController.HomeRouteGetController);
 
 export default HomeRoute;

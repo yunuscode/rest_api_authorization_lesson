@@ -28,6 +28,8 @@
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^6.0.9",
 		"morgan": "^1.10.0",
+		"pg": "^8.7.1",
+		"pg-pool": "^3.4.1",
 		"swagger-ui-express": "^4.1.6"
 	}
 }

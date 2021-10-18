@@ -1,42 +1,24 @@
-import pkg from "mongoose";
-
-const { model, Schema } = pkg;
-
-const UserSchema = new Schema(
-	{
-		name: {
-			type: String,
-			min: 2,
-			max: 32,
-			required: true,
-		},
-		username: {
-			type: String,
-			lowercase: true,
-			required: true,
-			unique: true,
-			min: 5,
-			max: 16,
-		},
-		password: {
-			type: String,
-			required: true,
-		},
-		role: {
-			type: String,
-			enum: ["admin", "superadmin", "user"],
-			required: true,
-			default: "user",
-		},
-	},
-	{
-		timestamps: {
-			createdAt: "created_at",
-			updatedAt: "updated_at",
-		},
+export default class UserModel {
+	static async create_user(client, name, username, password, role) {
+		try {
+			let response = await client.query(
+				`INSERT INTO users (
+					user_name, 
+					user_username, 
+					user_password, 
+					user_role
+				) VALUES (
+					$1, 
+					$2, 
+					crypt($3, gen_salt('bf', 10)),
+					$4
+				) 
+				RETURNING *`,
+				[name, username, password, role]
+			);
+			return response.rows;
+		} catch (error) {
+			console.log(error + "");
+		}
 	}
-);
-
-const User = new model("User", UserSchema);
-
-export default User;
+}

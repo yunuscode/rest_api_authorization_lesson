@@ -1,8 +1,11 @@
-import User from "../../models/UserModel.js";
+// import User from "../../models/UserModel.js";
 import Validations from "../../modules/validations.js";
 import { genCrypt } from "../../modules/bcrypt.js";
 import { createToken } from "../../modules/jwt.js";
 import Session from "../../models/SessionModel.js";
+
+import UserModel from "../../models/UserModel.js";
+import SessionModel from "../../models/SessionModel.js";
 
 export default class UserRouteController {
 	static async UserHomeGetController(request, response, next) {
@@ -20,19 +23,28 @@ export default class UserRouteController {
 			const { username, name, password } =
 				await Validations.SignUpValidation(request.body);
 
-			const user = await User.create({
+			console.log(username, name, password);
+
+			const data = await UserModel.create_user(
+				request.client,
 				name,
 				username,
-				password: await genCrypt(password),
-			});
+				password,
+				"user"
+			);
 
-			const session = await Session.create({
-				user_id: user._id,
-				user_agent: request.headers["user-agent"],
-			});
+			const [user] = await data;
+
+			const [session] = await SessionModel.create_session(
+				request.client,
+				request.headers["user-agent"],
+				user.user_id
+			);
+
+			console.log(session);
 
 			const token = createToken({
-				session_id: session._id,
+				user_id: user.user_id,
 			});
 
 			response.status(200).json({

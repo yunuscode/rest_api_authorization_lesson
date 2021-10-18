@@ -1,28 +1,20 @@
-import pkg from "mongoose";
-
-const { model, Schema, Types } = pkg;
-
-const SessionSchema = new Schema(
-	{
-		user_id: {
-			type: Types.ObjectId,
-			ref: "User",
-			required: true,
-		},
-		user_agent: {
-			type: String,
-			required: true,
-			max: 100,
-		},
-	},
-	{
-		timestamps: {
-			createdAt: "created_at",
-			updatedAt: "updated_at",
-		},
+export default class SessionModel {
+	static async create_session(client, user_agent, user_id) {
+		try {
+			let response = await client.query(
+				`INSERT INTO user_sessions (
+					session_user_agent, 
+					user_id
+				) VALUES (
+					$1, 
+					$2
+				) 
+				RETURNING *`,
+				[user_agent, user_id]
+			);
+			return response.rows;
+		} catch (error) {
+			console.log(error + "");
+		}
 	}
-);
-
-const Session = new model("Session", SessionSchema);
-
-export default Session;
+}
